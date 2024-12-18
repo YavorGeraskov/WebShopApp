@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 using WebShopApp.Data;
 using WebShopApp.Infrastrucutre.Data.Domain;
+using WebShopApp.Infrastrucutre.Data.Infrastructure;
 
 namespace WebShopApp
 {
@@ -27,10 +28,14 @@ namespace WebShopApp
                 options.Password.RequireNonAlphanumeric = false;
 
             })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+
+            app.PrepareDatabase();
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -43,6 +48,7 @@ namespace WebShopApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
