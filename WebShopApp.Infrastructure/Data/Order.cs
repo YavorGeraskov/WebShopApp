@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebShopApp.Infrastructure.Data.Domain
+namespace WebShopApp.Infrastructure.Data
 {
     public class Order
     {
@@ -22,6 +21,6 @@ namespace WebShopApp.Infrastructure.Data.Domain
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
-        public decimal TotalPrice { get { return this.Quantity * this.Price - this.Quantity * this.Price * this.Discount / 100; } }
+        public decimal TotalPrice { get { return Quantity * Price - Quantity * Price * Discount / 100; } }
     }
 }

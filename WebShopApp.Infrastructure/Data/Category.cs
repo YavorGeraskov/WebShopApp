@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebShopApp.Infrastructure.Data.Domain
+namespace WebShopApp.Infrastructure.Data
 {
     public class Category
     {
@@ -13,7 +12,7 @@ namespace WebShopApp.Infrastructure.Data.Domain
         [Required]
         [MaxLength(30)]
         public string CategoryName { get; set; } = null!;
-        
+
         public virtual IEnumerable<Product> product { get; set; } = new List<Product>();
     }
 }
