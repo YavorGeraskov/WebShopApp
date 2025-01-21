@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using WebShopApp.Core.Contracts;
-using WebShopApp.Data;
-using WebShopApp.Infrastrucutre.Data.Domain;
+using WebShopApp.Infrastructure.Data;
+using WebShopApp.Infrastructure.Data.Domain;
 
 namespace WebShopApp.Core.Services
 {
-    public class BrandService:IBrandService
+    public class BrandService : IBrandService
     {
-        private readonly ApplicationDbContext _context;
+        public readonly ApplicationDbContext _context;
         public BrandService(ApplicationDbContext context)
         {
             _context = context;
@@ -21,15 +20,18 @@ namespace WebShopApp.Core.Services
         {
             return _context.Brands.Find(brandId);
         }
+
         public List<Brand> GetBrands()
         {
-            List<Brand> brands = _context.Brands.ToList();
+          List<Brand> brands = _context.Brands.ToList();
             return brands;
         }
-        public List<Product> GetProductsByBrand(int brandId)
+
+        public List<Product> GetProductsByBrands(int brandId)
         {
             return _context.Products
-                .Where(x => x.BrandId == brandId) .ToList();
+                .Where(x => x.BrandId == brandId)
+                .ToList();
         }
     }
 }
