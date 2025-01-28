@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using WebShopApp.Core.Contracts;
 using WebShopApp.Infrastructure.Data;
 using WebShopApp.Infrastructure.Data.Domain;
@@ -20,9 +19,12 @@ namespace WebShopApp.Core.Services
             _context = context;
             _productService = productService;
         }
-        public bool Create (int productId, string userId, int quantity)
+
+
+        public bool Create(int productId, string userId, int quantity)
         {
             var product = this._context.Products.SingleOrDefault(x => x.Id == productId);
+
             if (product == null)
             {
                 return false;
@@ -35,13 +37,13 @@ namespace WebShopApp.Core.Services
                 Quantity = quantity,
                 Price = product.Price,
                 Discount = product.Discount
-
             };
-            product.Quantity = quantity;
+            product.Quantity -= quantity;
 
             this._context.Products.Update(product);
             this._context.Orders.Add(item);
-            return _context.SaveChanges() !=0;
+
+            return _context.SaveChanges() != 0;
         }
 
         public Order GetOrderById(int orderId)
@@ -53,9 +55,12 @@ namespace WebShopApp.Core.Services
         {
             return _context.Orders.OrderByDescending(x => x.OrderDate).ToList();
         }
-        public List<Order> GetOrdersByUser(string userId) 
+
+        public List<Order> GetOrdersByUser(string userId)
         {
-            return _context.Orders.Where(x=> x.UserId == userId).OrderByDescending(x=>x.OrderDate).ToList();
+           return _context.Orders.Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.OrderDate)
+                .ToList();
         }
 
         public bool RemoveById(int orderId)

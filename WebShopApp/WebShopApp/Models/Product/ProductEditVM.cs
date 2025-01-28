@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography.Xml;
+using NuGet.Protocol;
 using WebShopApp.Models.Brand;
 using WebShopApp.Models.Category;
 
@@ -8,13 +10,14 @@ namespace WebShopApp.Models.Product
     {
         [Key]
         public int Id { get; set; }
+
         [Required]
         [MaxLength(30)]
         [Display(Name = "Product Name")]
         public string ProductName { get; set; } = null!;
 
         [Required]
-        [Display(Name ="Brand")]
+        [Display(Name = "Brand")]
         public int BrandId { get; set; }
         public virtual List<BrandPairVM> Brands { get; set; } = new List<BrandPairVM>();
 
@@ -33,10 +36,8 @@ namespace WebShopApp.Models.Product
         [Display(Name = "Price")]
         public decimal Price { get; set; }
 
+        [Range(0, 100)]
         [Display(Name = "Discount")]
         public decimal Discount { get; set; }
-
-
-
     }
 }

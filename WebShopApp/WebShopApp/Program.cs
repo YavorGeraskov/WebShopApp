@@ -17,8 +17,8 @@ namespace WebShopApp
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseLazyLoadingProxies()
-                .UseSqlServer(connectionString));
+            options.UseLazyLoadingProxies()
+                    .UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
@@ -29,9 +29,10 @@ namespace WebShopApp
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 5;
-            })
-               .AddRoles<IdentityRole>()
-               .AddEntityFrameworkStores<ApplicationDbContext>();
+            })  
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddTransient<ICategoryService, CategoryService>();

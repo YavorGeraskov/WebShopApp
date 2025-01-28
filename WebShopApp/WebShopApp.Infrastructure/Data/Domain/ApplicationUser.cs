@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,6 @@ using System.Threading.Tasks;
 namespace WebShopApp.Infrastructure.Data.Domain
 {
     public class ApplicationUser : IdentityUser
-
     {
         [Required]
         [MaxLength(30)]

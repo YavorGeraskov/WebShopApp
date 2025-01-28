@@ -6,15 +6,17 @@ namespace WebShopApp.Models.Product
     {
         [Key]
         public int Id { get; set; }
-          
+
         [Display(Name = "Product Name")]
         public string ProductName { get; set; } = null!;
 
         public int BrandId { get; set; }
+
         [Display(Name = "Brand")]
         public string BrandName { get; set; } = null!;
 
         public int CategoryId { get; set; }
+
         [Display(Name = "Category")]
         public string CategoryName { get; set; } = null!;
 

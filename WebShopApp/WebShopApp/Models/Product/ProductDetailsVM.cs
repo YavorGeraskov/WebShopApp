@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using WebShopApp.Models.Brand;
-using WebShopApp.Models.Category;
 
 namespace WebShopApp.Models.Product
 {
@@ -13,10 +11,12 @@ namespace WebShopApp.Models.Product
         public string ProductName { get; set; } = null!;
 
         public int BrandId { get; set; }
+
         [Display(Name = "Brand")]
         public string BrandName { get; set; } = null!;
 
         public int CategoryId { get; set; }
+
         [Display(Name = "Category")]
         public string CategoryName { get; set; } = null!;
 

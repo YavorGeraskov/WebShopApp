@@ -1,6 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-#nullable disable
+﻿#nullable disable
 
 using System;
 using System.Collections.Generic;
@@ -18,6 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+
 using WebShopApp.Infrastructure.Data.Domain;
 
 namespace WebShopApp.Areas.Identity.Pages.Account
@@ -26,7 +25,6 @@ namespace WebShopApp.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
-       
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -36,19 +34,15 @@ namespace WebShopApp.Areas.Identity.Pages.Account
             _signInManager = signInManager;
         }
 
-        
         [BindProperty]
         public InputModel Input { get; set; }
 
-       
         public string ReturnUrl { get; set; }
-
 
         public class InputModel
         {
-           
             [Required]
-            [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength =2)]
+            [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
@@ -63,13 +57,13 @@ namespace WebShopApp.Areas.Identity.Pages.Account
             public string Address { get; set; }
 
             [Required]
-            [Display(Name = "Usename")]
+            [Display(Name = "Username")]
             public string UserName { get; set; }
 
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
-            public string Email { get; set; }   
+            public string Email { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -77,18 +71,15 @@ namespace WebShopApp.Areas.Identity.Pages.Account
             [Display(Name = "Password")]
             public string Password { get; set; }
 
-           
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
 
-
-        public async Task ppOnGetAsync(string returnUrl = null)
+        public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-            
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -113,13 +104,12 @@ namespace WebShopApp.Areas.Identity.Pages.Account
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }
-                foreach (var item in result.Errors)
+                foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, item.Description);
+                    ModelState.AddModelError(string.Empty, error.Description);
                 }
-            }     
+            }
             return Page();
         }
     }
-    
 }

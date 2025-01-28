@@ -9,14 +9,14 @@ using WebShopApp.Infrastructure.Data.Domain;
 
 namespace WebShopApp.Core.Services
 {
-    public class CategoryService:ICategoryService
+    public class CategoryService : ICategoryService
     {
-        public  readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
+
         public CategoryService(ApplicationDbContext context)
         {
             _context = context;
         }
-
 
         public Category GetCategoryById(int categoryId)
         {
@@ -25,15 +25,13 @@ namespace WebShopApp.Core.Services
 
         public List<Category> GetCategories()
         {
-           List<Category> categories = _context.Categories.ToList();
+            List<Category> categories = _context.Categories.ToList();
             return categories;
         }
-       
-        public List<Product> GetProductsByCategory(int caregoryId)
+
+        public List<Product> GetProductsByCategory(int categoryId)
         {
-           return _context.Products
-                .Where(x => x.CategoryId == caregoryId)
-                .ToList();  
+            return _context.Products.Where(x => x.CategoryId == categoryId).ToList();
         }
     }
 }

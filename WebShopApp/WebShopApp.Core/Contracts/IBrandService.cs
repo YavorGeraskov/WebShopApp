@@ -11,6 +11,6 @@ namespace WebShopApp.Core.Contracts
     {
         List<Brand> GetBrands();
         Brand GetBrandById(int brandId);
-        List<Product> GetProductsByBrands(int brandId);
+        List<Product> GetProductsByBrand(int brandId);
     }
 }
